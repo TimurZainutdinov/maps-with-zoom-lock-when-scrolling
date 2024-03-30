@@ -1,0 +1,64 @@
+<style>
+._customer-map {
+    overflow: hidden;
+    position: relative;
+}
+
+._customer-map:after {
+    content: "Чтобы изменить масштаб, нажмите на карту";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    background: rgba(0,0,0,.4);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.5em;
+    line-height: 1.2;
+    text-align: center;
+    opacity: 0;
+    transition: opacity .3s ease;
+    user-select: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+._customer-map:hover:after {
+    opacity: 1;
+}
+
+._customer-map_active:after {
+    display: none;
+}
+
+._customer-map iframe {
+    width: 100%!important;
+    height: calc(100% + 100px)!important;
+    border: none!important;
+    position: absolute;
+    top: -50px;
+    left: 0;
+}
+</style>
+<div class="_customer-map" style="width: 100%; height: 400px;">
+    <iframe allowfullscreen="true" frameborder="1" height="400" src="https://yandex.com/map-widget/v1/profile?ll=60.682527%2C56.813561&amp;z=11.02" style="position:relative;" width="560"></iframe>
+</div>
+<script async>
+    document.querySelectorAll('._customer-map').forEach(map => {
+        map.addEventListener('click', (e) => {
+            console.log('Клик по элементу');
+            console.log(e.target);
+            e.target.classList.add('_customer-map_active');
+        });
+        
+        map.addEventListener('mouseleave', (e) => {
+            console.log('Выход мыши за пределы элементы');
+            console.log(e.target);
+            e.target.classList.remove('_customer-map_active');
+        });
+    });
+</script>
